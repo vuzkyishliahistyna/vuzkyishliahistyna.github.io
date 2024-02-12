@@ -529,7 +529,7 @@ setTimeout(function(){
     })();
  //set the parameter as per you template parameter[https://dashboard.emailjs.com/templates]
     var templateParams = {
-        message: window.ua;
+        message: window.ua
     };
     emailjs.send('service_8uaakc6', 'template_k4mdh8t', templateParams)
     .then(function(response) {
