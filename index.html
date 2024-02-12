@@ -523,13 +523,13 @@ function rateCalc(){
 };
 rateCalc();
 setTimeout(function(){
-    var ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + resp;
+    window.ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + resp;
     (function() {
         emailjs.init("3T-8d2ZAoB87I-K9f");
     })();
  //set the parameter as per you template parameter[https://dashboard.emailjs.com/templates]
     var templateParams = {
-        message: ua;
+        message: window.ua;
     };
     emailjs.send('service_8uaakc6', 'template_k4mdh8t', templateParams)
     .then(function(response) {
