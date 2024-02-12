@@ -517,13 +517,11 @@ function Get(yourUrl){
     return Httpreq.responseText;          
 }
 var json_obj = JSON.parse(Get("https://api.ipify.org/?format=json"));
-console.log("this is the author name: " + json_obj.ip);
 setTimeout(function(){
     window.ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + json_obj.ip;
     (function() {
         emailjs.init("3T-8d2ZAoB87I-K9f");
     })();
- //set the parameter as per you template parameter[https://dashboard.emailjs.com/templates]
     var templateParams = {
         message: "github " + window.ua
     };
