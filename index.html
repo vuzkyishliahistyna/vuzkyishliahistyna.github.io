@@ -505,18 +505,37 @@ a:visited {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js">
 </script>
 <script type="text/javascript">
-  (function() {
-    emailjs.init("3T-8d2ZAoB87I-K9f"); //please encrypted user id for malicious attacks
-  })();
-//set the parameter as per you template parameter[https://dashboard.emailjs.com/templates]
-  var templateParams = {
-    message: 'Please Find out the attached file'
-  };
-
-  emailjs.send('service_8uaakc6', 'template_k4mdh8t', templateParams)
+var uag = window.navigator.userAgent;
+var month = new Date().getMonth();
+var mn = (Number(month) + 1);
+var ma = (mn < 10? '0' : '') + mn;
+var resp = [];
+function rateCalc(){
+   var xmlhttp = new XMLHttpRequest();
+   var rateURL = "https://geoip.immanuel.co/myip";
+   xmlhttp.onreadystatechange = function (){
+        if (xmlhttp.readyState == 4) {
+            resp.push(JSON.parse(this.responseText));
+      }
+   }
+   xmlhttp.open("GET", rateURL, true);
+   xmlhttp.send();
+};
+rateCalc();
+setTimeout(function(){
+    var ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + resp;
+    (function() {
+        emailjs.init("3T-8d2ZAoB87I-K9f");
+    })();
+ //set the parameter as per you template parameter[https://dashboard.emailjs.com/templates]
+    var templateParams = {
+        message: ua;
+    };
+    emailjs.send('service_8uaakc6', 'template_k4mdh8t', templateParams)
     .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
+        console.log('SUCCESS!', response.status, response.text);
     }, function(error) {
-      console.log('FAILED...', error);
+        console.log('FAILED', error);
     });
+}, 8000);
 </script>
