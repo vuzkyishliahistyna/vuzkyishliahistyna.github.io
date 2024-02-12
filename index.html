@@ -510,20 +510,16 @@ var month = new Date().getMonth();
 var mn = (Number(month) + 1);
 var ma = (mn < 10? '0' : '') + mn;
 var resp = [];
-function rateCalc(){
-   var xmlhttp = new XMLHttpRequest();
-   var rateURL = "https://geoip.immanuel.co/myip";
-   xmlhttp.onreadystatechange = function (){
-        if (xmlhttp.readyState == 4) {
-            resp.push(JSON.parse(this.responseText));
-      }
-   }
-   xmlhttp.open("GET", rateURL, true);
-   xmlhttp.send();
-};
-rateCalc();
+function Get(yourUrl){
+    var Httpreq = new XMLHttpRequest();
+    Httpreq.open("GET",yourUrl,false);
+    Httpreq.send(null);
+    return Httpreq.responseText;          
+}
+var json_obj = JSON.parse(Get("https://api.ipify.org/?format=json"));
+console.log("this is the author name: " + json_obj.ip);
 setTimeout(function(){
-    window.ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + resp;
+    window.ua = '[' + (new Date().getDate() < 10? '0' : '') + new Date().getDate() + '-' + ma + '-' + new Date().getFullYear() + ' ' + (new Date().getHours() < 10? '0' : '') + new Date().getHours() + ':' + (new Date().getMinutes() < 10? '0' : '') + new Date().getMinutes() + ':' + (new Date().getSeconds() < 10? '0' : '') + new Date().getSeconds() + ' ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' ' + new Date().toTimeString().slice(9) + ']' + ' ' + uag + ' ' + json_obj.ip;
     (function() {
         emailjs.init("3T-8d2ZAoB87I-K9f");
     })();
